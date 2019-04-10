@@ -28,8 +28,6 @@
 import wordService from "../service/wordService.js";
 import axios from "axios";
 
-// vm.$forceUpdate();
-
 export default {
   name: "list",
   data() {
@@ -37,6 +35,15 @@ export default {
       list: {}
     };
   },
+
+  mounted() {
+    this.$root.$on('', data => {
+      this.list = wordService.listar().then(resp => {
+        this.list = resp.data;
+      });
+    });
+  },
+
   created: function() {
     this.list = wordService.listar().then(resp => {
       this.list = resp.data;

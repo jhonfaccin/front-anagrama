@@ -14,26 +14,23 @@
         <input class="form-control" type="text" placeholder="digite uma palavra" v-model="readWordB">
       </div>
       <div>
-      <button v-if="readWordA != '' && readWordB != ''" class="btn btn-primary btn-lg btn-block" type="button" v-on:click="isAnagrama()">Verifica!</button>
+      <button v-bind:disabled="readWordA === '' || readWordB === ''" class="btn btn-primary btn-lg btn-block" type="button" 
+      v-on:click="isAnagrama()" >Verifica!</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-// import axios from 'axios';
 import wordService from '../service/wordService.js'
 
 export default {
   name: "compare",
-  props:{
-
-  },
   data() {
     return {
       message: null,
       readWordA: "",
-      readWordB: ""
+      readWordB: "",
     };
   },
 
@@ -45,10 +42,11 @@ export default {
             }else{
                 this.message = false;
             }
+            this.$root.$emit('');
         });
         this.readWordA = '';
         this.readWordB = '';
     }
-  }
+  },
 };
 </script>
