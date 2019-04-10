@@ -1,6 +1,6 @@
 <template>
   <div id="list">
-    <div id="list-container">
+    <div id="list-container" v-if="Object.keys(list).length">
       <h4>Lista de Palavras</h4>
       <table class="table">
         <thead>
@@ -15,8 +15,6 @@
             <td class="table-success" v-if="iten.isAnagrama == true">{{iten.wordA}}</td>
             <td class="table-danger" v-if="iten.isAnagrama == false">{{iten.wordB}}</td>
             <td class="table-success" v-if="iten.isAnagrama == true">{{iten.wordB}}</td>
-
-            <!-- <td v-if="iten.isAnagrama == true">{{iten.wordB}}</td> -->
           </tr>
         </tbody>
       </table>
