@@ -10,11 +10,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(iten,i) in list" v-bind:key="i">
-            <td class="table-danger" v-if="iten.isAnagrama == false">{{iten.wordA}}</td>
-            <td class="table-success" v-if="iten.isAnagrama == true">{{iten.wordA}}</td>
-            <td class="table-danger" v-if="iten.isAnagrama == false">{{iten.wordB}}</td>
-            <td class="table-success" v-if="iten.isAnagrama == true">{{iten.wordB}}</td>
+          <tr v-for="(iten,i) in list" v-bind:key="i" style="border-bottom: 1px solid black">
+            <td class="anagram-false" v-if="iten.isAnagrama == false">{{iten.wordA}}</td>
+            <td class="anagram-true" v-if="iten.isAnagrama == true">{{iten.wordA}}</td>
+            <td class="anagram-false" v-if="iten.isAnagrama == false">{{iten.wordB}}</td>
+            <td class="anagram-true" v-if="iten.isAnagrama == true">{{iten.wordB}}</td>
           </tr>
         </tbody>
       </table>
@@ -35,15 +35,15 @@ export default {
   },
 
   mounted() {
-    this.$root.$on('', data => {
-      this.list = wordService.listar().then(resp => {
+    this.$root.$on("", data => {
+      this.list = wordService.list().then(resp => {
         this.list = resp.data;
       });
     });
   },
 
   created: function() {
-    this.list = wordService.listar().then(resp => {
+    this.list = wordService.list().then(resp => {
       this.list = resp.data;
     });
   }
@@ -53,6 +53,15 @@ export default {
 <style scoped>
 #list-container {
   padding-top: 20px;
+}
+.anagram-true {
+  background: #d6e7f2;
+  border-bottom: 1px solid black;
+}
+
+.anagram-false {
+  background: #efdbdb;
+  border-bottom: 1px solid black;
 }
 </style>
 

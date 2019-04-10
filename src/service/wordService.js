@@ -1,33 +1,30 @@
 import { http } from './config'
 
+const isAnagram = function (readWordA,readWordB) {
+    const wordA = readWordA.toLowerCase().split("").sort();
+    const wordB = readWordB.toLowerCase().split("").sort();
+
+    if (wordA.toString() === wordB.toString() && wordA.length == wordB.length) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+
 export default {
-    listar : () => {
+    list: () => {
         return http.get('/anagramas/').then(resp => {
             return resp
         });
     },
 
-    salvar : (readWordA,readWordB) => {
+    save: (readWordA, readWordB) => {
         var param = {}
         param.wordA = readWordA;
         param.wordB = readWordB;
-        param.isAnagrama = false;
+        param.isAnagrama = isAnagram(readWordA,readWordB);
 
-        var wordA = readWordA;
-        var wordB = readWordB;
-        wordA = wordA.toLowerCase().split("").sort();
-        wordB = wordB.toLowerCase().split("").sort();
-
-
-        if (wordA.toString() === wordB.toString()){
-            param.isAnagrama = true;
-        }else{
-            param.isAnagrama = false;
-        }
-
-        if (wordA.length != wordB.length) {
-            param.isAnagrama = false;
-        }
         return http.post('/anagramas/', param).then(resp => {
             return resp;
         })
